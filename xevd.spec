@@ -1,6 +1,6 @@
 Name:           xevd
 Version:        0.5.0
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        eXtra-fast Essential Video Decoder, MPEG-5 EVC (Essential Video Coding)
 License:        BSD-3-Clause
 URL:            https://github.com/mpeg5/xevd
@@ -8,7 +8,7 @@ URL:            https://github.com/mpeg5/xevd
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
 BuildRequires:  cmake
-BuildRequires:  gcc-c++
+BuildRequires:  gcc
 
 %description
 The eXtra-fast Essential Video Decoder (XEVD) is an opensource and fast MPEG-5
@@ -44,7 +44,11 @@ developing applications that use %{name}.
 echo "v%{version}" > version.txt
 
 %build
-%cmake
+%cmake \
+%ifarch aarch64
+    -DARM=TRUE
+%endif
+
 %cmake_build
 
 %install
@@ -68,5 +72,8 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Thu Sep 26 2024 Simone Caronni <negativo17@gmail.com> - 0.5.0-2
+- Update requirements.
+
 * Mon Aug 19 2024 Simone Caronni <negativo17@gmail.com> - 0.5.0-1
 - First build.
