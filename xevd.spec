@@ -1,11 +1,14 @@
 Name:           xevd
+Epoch:          1
 Version:        0.5.0
-Release:        2%{?dist}
+Release:        1%{?dist}
 Summary:        eXtra-fast Essential Video Decoder, MPEG-5 EVC (Essential Video Coding)
 License:        BSD-3-Clause
 URL:            https://github.com/mpeg5/xevd
 
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
+# Fix builds on other architectures (Fedora patches):
+Patch0:         %{name}-fix-build-on-non-x86.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -44,11 +47,7 @@ developing applications that use %{name}.
 echo "v%{version}" > version.txt
 
 %build
-%cmake \
-%ifarch aarch64
-    -DARM=TRUE
-%endif
-
+%cmake -DSET_PROF=MAIN
 %cmake_build
 
 %install
@@ -72,6 +71,9 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Mon Sep 08 2025 Simone Caronni <negativo17@gmail.com> - 1:0.5.0-1
+- Fix build of MAIN profile for aarch64.
+
 * Thu Sep 26 2024 Simone Caronni <negativo17@gmail.com> - 0.5.0-2
 - Update requirements.
 
