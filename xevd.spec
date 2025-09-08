@@ -7,7 +7,6 @@ License:        BSD-3-Clause
 URL:            https://github.com/mpeg5/xevd
 
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-# Fix builds on other architectures (Fedora patches):
 Patch0:         %{name}-fix-build-on-non-x86.patch
 
 BuildRequires:  cmake
@@ -36,7 +35,7 @@ applications that use %{name}. This package contains the shared libraries.
 
 %package        devel
 Summary:        Development files for %{name}
-Requires:       %{name}-libs%{?_isa} = %{version}-%{release}
+Requires:       %{name}-libs%{?_isa} = %{epoch}:%{version}-%{release}
 
 %description    devel
 The %{name}-devel package contains libraries and header files for
