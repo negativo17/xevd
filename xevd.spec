@@ -8,6 +8,9 @@ URL:            https://github.com/mpeg5/xevd
 
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 Patch0:         %{name}-fix-build-on-non-x86.patch
+# https://github.com/mpeg5/xevd/commit/4087f635624cf4ee6ebe3f9ea165ff939b32117f
+# But also for src_main:
+Patch1:         xevd-link-libm.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
