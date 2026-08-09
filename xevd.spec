@@ -1,16 +1,14 @@
 Name:           xevd
 Epoch:          1
-Version:        0.5.0
-Release:        1%{?dist}
+Version:        0.7.0
+Release:        2%{?dist}
 Summary:        eXtra-fast Essential Video Decoder, MPEG-5 EVC (Essential Video Coding)
 License:        BSD-3-Clause
 URL:            https://github.com/mpeg5/xevd
 
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
-Patch0:         %{name}-fix-build-on-non-x86.patch
-# https://github.com/mpeg5/xevd/commit/4087f635624cf4ee6ebe3f9ea165ff939b32117f
-# But also for src_main:
-Patch1:         xevd-link-libm.patch
+
+Patch0:         %{name}-%{version}-format-overflow.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -65,7 +63,7 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %license COPYING
 %doc README.md
 %{_libdir}/lib%{name}.so.0
-%{_libdir}/lib%{name}.so.0.5
+%{_libdir}/lib%{name}.so.0.7
 
 %files devel
 %{_includedir}/%{name}/
@@ -73,6 +71,12 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Sun Aug 09 2026 Simone Caronni <negativo17@gmail.com> - 1:0.7.0-2
+- Fix build on i386.
+
+* Sun Aug 09 2026 Simone Caronni <negativo17@gmail.com> - 1:0.7.0-1
+- Update to 0.7.0.
+
 * Mon Sep 08 2025 Simone Caronni <negativo17@gmail.com> - 1:0.5.0-1
 - Fix build of MAIN profile for aarch64.
 
