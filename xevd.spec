@@ -1,14 +1,14 @@
 Name:           xevd
 Epoch:          1
-Version:        0.7.0
-Release:        2%{?dist}
+Version:        0.8.0
+Release:        1%{?dist}
 Summary:        eXtra-fast Essential Video Decoder, MPEG-5 EVC (Essential Video Coding)
 License:        BSD-3-Clause
 URL:            https://github.com/mpeg5/xevd
 
 Source0:        %{url}/archive/v%{version}.tar.gz#/%{name}-%{version}.tar.gz
 
-Patch0:         %{name}-%{version}-format-overflow.patch
+Patch0:         %{name}-format-overflow.patch
 
 BuildRequires:  cmake
 BuildRequires:  gcc
@@ -63,7 +63,7 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %license COPYING
 %doc README.md
 %{_libdir}/lib%{name}.so.0
-%{_libdir}/lib%{name}.so.0.7
+%{_libdir}/lib%{name}.so.0.8
 
 %files devel
 %{_includedir}/%{name}/
@@ -71,6 +71,9 @@ rm -fr %{buildroot}%{_libdir}/%{name}
 %{_libdir}/pkgconfig/%{name}.pc
 
 %changelog
+* Tue Oct 13 2026 Simone Caronni <negativo17@gmail.com> - 1:0.8.0-1
+- Update to 0.8.0.
+
 * Sun Aug 09 2026 Simone Caronni <negativo17@gmail.com> - 1:0.7.0-2
 - Fix build on i386.
 
